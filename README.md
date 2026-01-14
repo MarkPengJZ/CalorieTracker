@@ -26,3 +26,5 @@ Open http://localhost:8000 to use the logging UI.
 
 - `data/photo_logs.jsonl` stores raw photo log metadata and confirmations.
 - `data/feedback.jsonl` stores confirmed labels + portions for model improvement.
+## Product Documentation
+- [Product Spec](docs/product-spec.md)
