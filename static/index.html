@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calorie Tracker</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Calorie Tracker</h1>
+        <p>Fast search with ranking, quick add, and meal templates.</p>
+      </header>
+
+      <section class="search-section">
+        <div class="search-input">
+          <input id="searchInput" type="text" placeholder="Search foods" />
+          <button id="searchButton">Search</button>
+        </div>
+        <div class="search-meta" id="searchMeta"></div>
+        <ul id="searchResults" class="results"></ul>
+      </section>
+
+      <section class="grid">
+        <div class="card">
+          <h2>Quick Add Custom Macros</h2>
+          <form id="macroForm">
+            <label>
+              Name
+              <input type="text" name="name" required />
+            </label>
+            <label>
+              Protein (g)
+              <input type="number" name="protein" min="0" value="0" />
+            </label>
+            <label>
+              Carbs (g)
+              <input type="number" name="carbs" min="0" value="0" />
+            </label>
+            <label>
+              Fat (g)
+              <input type="number" name="fat" min="0" value="0" />
+            </label>
+            <button type="submit">Quick Add</button>
+          </form>
+          <ul id="customMacros" class="results"></ul>
+        </div>
+
+        <div class="card">
+          <h2>Favorites</h2>
+          <ul id="favorites" class="results"></ul>
+          <h2>Recents</h2>
+          <ul id="recents" class="results"></ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Meal Templates</h2>
+        <form id="templateForm">
+          <label>
+            Template name
+            <input type="text" name="name" required />
+          </label>
+          <button type="submit">Create from recents</button>
+        </form>
+        <div id="templates" class="templates"></div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
