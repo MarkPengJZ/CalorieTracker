@@ -1,0 +1,54 @@
+{
+  "source": {
+    "name": "BrandDB",
+    "dataset": "Packaged",
+    "version": "2024.02",
+    "url": "https://example.com/branddb"
+  },
+  "items": [
+    {
+      "name": "Banana",
+      "brand": null,
+      "locale": "en-US",
+      "confidence": 0.8,
+      "portions": [
+        {
+          "description": "medium",
+          "amount": 118,
+          "unit": "g"
+        }
+      ],
+      "nutrients_per_100g": {
+        "calories_kcal": 90,
+        "protein_g": 1.1,
+        "fat_g": 0.4,
+        "carbs_g": 23.0,
+        "fiber_g": 2.5,
+        "sugar_g": 12.3,
+        "sodium_mg": 1
+      }
+    },
+    {
+      "name": "Oat Milk",
+      "brand": "Oaty",
+      "locale": "en-US",
+      "confidence": 0.88,
+      "portions": [
+        {
+          "description": "cup",
+          "amount": 240,
+          "unit": "ml"
+        }
+      ],
+      "nutrients_per_100g": {
+        "calories_kcal": 47,
+        "protein_g": 1.0,
+        "fat_g": 1.5,
+        "carbs_g": 7.9,
+        "fiber_g": 0.8,
+        "sugar_g": 4.0,
+        "sodium_mg": 100
+      }
+    }
+  ]
+}

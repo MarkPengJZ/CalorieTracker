@@ -69,5 +69,182 @@
     </main>
 
     <script src="/app.js"></script>
+    <title>CalorieTracker Photo Log</title>
+    <style>
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        margin: 2rem;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+      .panel {
+        background: #ffffff;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        max-width: 720px;
+      }
+      .panel + .panel {
+        margin-top: 1.5rem;
+      }
+      .row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      label {
+        font-weight: 600;
+      }
+      button {
+        background: #2563eb;
+        color: #ffffff;
+        border: none;
+        padding: 0.75rem 1.25rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button[disabled] {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+      .candidate {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        background: #f1f5f9;
+        margin-top: 0.5rem;
+      }
+      .status {
+        font-size: 0.95rem;
+        color: #475569;
+      }
+      .success {
+        color: #16a34a;
+        font-weight: 600;
+      }
+      .error {
+        color: #dc2626;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="panel">
+      <h1>Photo Food Log</h1>
+      <p class="status">
+        Upload a meal photo to get candidate foods. Confirm the label and enter portion size to save.
+      </p>
+      <form id="upload-form" class="row">
+        <label>
+          Meal photo
+          <input type="file" id="photo" accept="image/*" required />
+        </label>
+        <button type="submit">Analyze Photo</button>
+      </form>
+      <div id="upload-status" class="status"></div>
+    </div>
+
+    <div class="panel" id="confirmation-panel" hidden>
+      <h2>Confirm Food</h2>
+      <div id="candidate-list"></div>
+      <form id="confirm-form" class="row">
+        <label>
+          Confirmed label
+          <input type="text" id="confirmed-label" required />
+        </label>
+        <label>
+          Portion (grams)
+          <input type="number" id="portion" min="1" step="0.1" required />
+        </label>
+        <button type="submit">Save Entry</button>
+      </form>
+      <div id="confirm-status" class="status"></div>
+    </div>
+
+    <script>
+      const uploadForm = document.getElementById("upload-form");
+      const confirmPanel = document.getElementById("confirmation-panel");
+      const candidateList = document.getElementById("candidate-list");
+      const confirmedLabel = document.getElementById("confirmed-label");
+      const portion = document.getElementById("portion");
+      const uploadStatus = document.getElementById("upload-status");
+      const confirmStatus = document.getElementById("confirm-status");
+      const confirmForm = document.getElementById("confirm-form");
+      let activeLogId = null;
+
+      uploadForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        uploadStatus.textContent = "Analyzing photo...";
+        uploadStatus.className = "status";
+        const photoFile = document.getElementById("photo").files[0];
+        if (!photoFile) {
+          uploadStatus.textContent = "Please select a photo.";
+          uploadStatus.className = "status error";
+          return;
+        }
+        const formData = new FormData();
+        formData.append("photo", photoFile);
+
+        try {
+          const response = await fetch("/photo-log", { method: "POST", body: formData });
+          if (!response.ok) {
+            throw new Error("Failed to analyze photo.");
+          }
+          const data = await response.json();
+          activeLogId = data.log_id;
+          candidateList.innerHTML = "";
+          data.candidates.forEach((candidate) => {
+            const row = document.createElement("div");
+            row.className = "candidate";
+            row.innerHTML = `<span>${candidate.label}</span><span>${Math.round(
+              candidate.confidence * 100
+            )}%</span>`;
+            row.addEventListener("click", () => {
+              confirmedLabel.value = candidate.label;
+            });
+            candidateList.appendChild(row);
+          });
+          confirmPanel.hidden = false;
+          uploadStatus.textContent = "Pick a candidate and confirm.";
+          uploadStatus.className = "status";
+        } catch (error) {
+          uploadStatus.textContent = error.message;
+          uploadStatus.className = "status error";
+        }
+      });
+
+      confirmForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        confirmStatus.textContent = "Saving log...";
+        confirmStatus.className = "status";
+        if (!activeLogId) {
+          confirmStatus.textContent = "Please analyze a photo first.";
+          confirmStatus.className = "status error";
+          return;
+        }
+        try {
+          const response = await fetch("/photo-log/confirm", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              log_id: activeLogId,
+              confirmed_label: confirmedLabel.value.trim(),
+              portion_grams: Number(portion.value),
+            }),
+          });
+          if (!response.ok) {
+            throw new Error("Failed to save confirmation.");
+          }
+          const data = await response.json();
+          confirmStatus.textContent = `Saved ${data.confirmed_label} (${data.portion_grams}g).`;
+          confirmStatus.className = "status success";
+        } catch (error) {
+          confirmStatus.textContent = error.message;
+          confirmStatus.className = "status error";
+        }
+      });
+    </script>
   </body>
 </html>
