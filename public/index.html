@@ -8,68 +8,106 @@
   </head>
   <body>
     <main class="container">
-      <header>
-        <h1>Calorie Tracker</h1>
-        <p class="subtitle">Track streaks, check-ins, and badges based on your local day.</p>
-      </header>
-
-      <section class="card" id="status-card">
-        <div class="card-header">
-          <h2>Streak Status</h2>
-          <label>
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Calorie Tracker</p>
+          <h1>Meet Sprout, your nutrition buddy</h1>
+          <p class="subtitle">Keep your streak alive to level up your pet and unlock badges.</p>
+        </div>
+        <div class="header-actions">
+          <label class="timezone-field">
             Time zone
             <input id="timezone" type="text" placeholder="America/Los_Angeles" />
           </label>
           <button id="refresh">Refresh</button>
         </div>
-        <div class="status-grid">
-          <div>
-            <h3>Current streak</h3>
-            <p id="current-streak">0</p>
-          </div>
-          <div>
-            <h3>Longest streak</h3>
-            <p id="longest-streak">0</p>
-          </div>
-          <div>
-            <h3>Last success</h3>
-            <p id="last-success">—</p>
-          </div>
-          <div>
-            <h3>Today</h3>
-            <p id="today-summary">—</p>
-          </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-avatar">
+          <div class="rainbow" aria-hidden="true"></div>
+          <button class="avatar-shell" id="avatar-button" type="button" aria-label="Interact with Sprout">
+            <div class="avatar-face" id="avatar-face" aria-hidden="true">
+              <span class="eye left"></span>
+              <span class="eye right"></span>
+              <span class="mouth" id="avatar-mouth"></span>
+            </div>
+            <div class="avatar-body" aria-hidden="true"></div>
+          </button>
+          <div class="avatar-badge" id="avatar-badge">Lv. 1</div>
         </div>
-        <div>
-          <h3>Badges</h3>
-          <ul id="badges"></ul>
+        <div class="hero-info">
+          <div class="pet-status">
+            <h2>Sprout mood</h2>
+            <p class="mood" id="pet-mood">Curious</p>
+            <p class="mood-detail" id="pet-mood-detail">Log a meal or check in to cheer Sprout up.</p>
+          </div>
+          <div class="pet-actions">
+            <button class="secondary" type="button" id="pet-feed">Feed</button>
+            <button class="secondary" type="button" id="pet-play">Play</button>
+            <button class="secondary" type="button" id="pet-cheer">Cheer</button>
+          </div>
+          <div class="pet-message" id="pet-message">Tap Sprout to say hi!</div>
         </div>
       </section>
 
-      <section class="card">
-        <h2>Log a Meal</h2>
-        <form id="meal-form">
-          <label>
-            Calories
-            <input type="number" name="calories" min="1" required />
-          </label>
-          <label>
-            Description
-            <input type="text" name="description" placeholder="Lunch" />
-          </label>
-          <button type="submit">Add Meal</button>
-        </form>
+      <section class="metrics">
+        <article class="metric-card">
+          <h3>Current streak</h3>
+          <p class="metric-value" id="current-streak">0</p>
+          <p class="metric-label">days in a row</p>
+        </article>
+        <article class="metric-card">
+          <h3>Longest streak</h3>
+          <p class="metric-value" id="longest-streak">0</p>
+          <p class="metric-label">best run</p>
+        </article>
+        <article class="metric-card">
+          <h3>Last success</h3>
+          <p class="metric-value" id="last-success">—</p>
+          <p class="metric-label">most recent win</p>
+        </article>
+        <article class="metric-card">
+          <h3>Today</h3>
+          <p class="metric-value" id="today-summary">—</p>
+          <p class="metric-label">meals + calories</p>
+        </article>
       </section>
 
-      <section class="card">
-        <h2>Daily Check-In</h2>
-        <form id="checkin-form">
-          <label>
-            Note
-            <input type="text" name="note" placeholder="Feeling good" />
-          </label>
-          <button type="submit">Check in</button>
-        </form>
+      <section class="grid">
+        <article class="card">
+          <h2>Log a Meal</h2>
+          <form id="meal-form">
+            <label>
+              Calories
+              <input type="number" name="calories" min="1" required />
+            </label>
+            <label>
+              Description
+              <input type="text" name="description" placeholder="Lunch" />
+            </label>
+            <button type="submit">Add Meal</button>
+          </form>
+        </article>
+
+        <article class="card">
+          <h2>Daily Check-In</h2>
+          <form id="checkin-form">
+            <label>
+              Note
+              <input type="text" name="note" placeholder="Feeling good" />
+            </label>
+            <button type="submit">Check in</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="card" id="status-card">
+        <div class="card-header">
+          <h2>Badges</h2>
+          <p class="subtitle small">Collect streak milestones to keep Sprout energized.</p>
+        </div>
+        <ul id="badges" class="badge-list"></ul>
       </section>
 
       <section class="card">

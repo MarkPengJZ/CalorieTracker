@@ -18,6 +18,13 @@ uvicorn app.main:app --reload
 
 Open http://localhost:8000 to use the logging UI.
 
+## Deploy to Vercel (wrapper-friendly hosting)
+
+1. Push this repo to GitHub.
+2. Create a new Vercel project and import the repo.
+3. Vercel will detect `vercel.json` and deploy the Express app.
+4. Use the Vercel URL as the endpoint your Android WebView wrapper loads.
+
 ## API
 
 - `POST /photo-log` (multipart form with `photo`)
