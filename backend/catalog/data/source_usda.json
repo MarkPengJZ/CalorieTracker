@@ -1,0 +1,52 @@
+{
+  "source": {
+    "name": "USDA",
+    "dataset": "Foundation",
+    "version": "2024.01",
+    "url": "https://example.com/usda"
+  },
+  "items": [
+    {
+      "name": "Banana",
+      "brand": null,
+      "locale": "en-US",
+      "confidence": 0.92,
+      "portions": [
+        {
+          "description": "100g",
+          "amount": 100,
+          "unit": "g"
+        }
+      ],
+      "nutrients_per_100g": {
+        "calories_kcal": 89,
+        "protein_g": 1.1,
+        "fat_g": 0.3,
+        "carbs_g": 22.8,
+        "fiber_g": 2.6,
+        "sugar_g": 12.2,
+        "sodium_mg": 1
+      }
+    },
+    {
+      "name": "Greek Yogurt",
+      "brand": "Generic",
+      "locale": "en-US",
+      "confidence": 0.85,
+      "portions": [
+        {
+          "description": "cup",
+          "amount": 170,
+          "unit": "g"
+        }
+      ],
+      "nutrients_per_100g": {
+        "calories_kcal": 59,
+        "protein_g": 10.3,
+        "fat_g": 0.4,
+        "carbs_g": 3.6,
+        "sodium_mg": 36
+      }
+    }
+  ]
+}
