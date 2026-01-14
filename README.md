@@ -1,5 +1,6 @@
 # CalorieTracker
 
+Simple Flask-backed calorie tracker demo with ranked search, favorites/recents, quick add macros, and meal templates.
 Minimal photo logging flow that uses an **on-device model** placeholder (deterministic hashing) to propose candidate foods. Users must confirm the label and portion size, and confirmed entries are persisted to a feedback dataset for future improvements.
 
 ## Run locally
@@ -8,6 +9,10 @@ Minimal photo logging flow that uses an **on-device model** placeholder (determi
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python app.py
+```
+
+Then open http://localhost:5000.
 uvicorn app.main:app --reload
 ```
 
