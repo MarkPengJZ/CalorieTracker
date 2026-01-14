@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calorie Tracker Streaks</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Calorie Tracker</h1>
+        <p class="subtitle">Track streaks, check-ins, and badges based on your local day.</p>
+      </header>
+
+      <section class="card" id="status-card">
+        <div class="card-header">
+          <h2>Streak Status</h2>
+          <label>
+            Time zone
+            <input id="timezone" type="text" placeholder="America/Los_Angeles" />
+          </label>
+          <button id="refresh">Refresh</button>
+        </div>
+        <div class="status-grid">
+          <div>
+            <h3>Current streak</h3>
+            <p id="current-streak">0</p>
+          </div>
+          <div>
+            <h3>Longest streak</h3>
+            <p id="longest-streak">0</p>
+          </div>
+          <div>
+            <h3>Last success</h3>
+            <p id="last-success">—</p>
+          </div>
+          <div>
+            <h3>Today</h3>
+            <p id="today-summary">—</p>
+          </div>
+        </div>
+        <div>
+          <h3>Badges</h3>
+          <ul id="badges"></ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Log a Meal</h2>
+        <form id="meal-form">
+          <label>
+            Calories
+            <input type="number" name="calories" min="1" required />
+          </label>
+          <label>
+            Description
+            <input type="text" name="description" placeholder="Lunch" />
+          </label>
+          <button type="submit">Add Meal</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Daily Check-In</h2>
+        <form id="checkin-form">
+          <label>
+            Note
+            <input type="text" name="note" placeholder="Feeling good" />
+          </label>
+          <button type="submit">Check in</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Recent History</h2>
+        <ul id="history"></ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

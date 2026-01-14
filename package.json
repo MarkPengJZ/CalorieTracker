@@ -1,0 +1,14 @@
+{
+  "name": "calorie-tracker",
+  "version": "1.0.0",
+  "description": "Calorie tracker with streaks and badges",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "luxon": "^3.5.0"
+  }
+}
